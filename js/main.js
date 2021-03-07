@@ -1,19 +1,19 @@
 // Board is represented by these arrays
 // 0 is empty, X is 1, O is -1.
 
-let array1 = [1, 0, 0]
-let array2 = [0, 1, 0]
-let array3 = [0, 0, 1]
+let row1 = [0, 0, 0]
+let row2 = [0, 0, 0]
+let row3 = [0, 0, 0]
 
 function winConditions() {
-    let win1 = array1[0] + array1[1] + array1[2]
-    let win2 = array2[0] + array2[1] + array2[2]
-    let win3 = array3[0] + array3[1] + array3[2]
-    let win4 = array1[0] + array2[0] + array3[0]
-    let win5 = array1[1] + array2[1] + array3[1]
-    let win6 = array1[2] + array2[2] + array3[2]
-    let win7 = array1[0] + array2[1] + array3[2]
-    let win8 = array1[2] + array2[1] + array3[0]
+    let win1 = row1[0] + row1[1] + row1[2]
+    let win2 = row2[0] + row2[1] + row2[2]
+    let win3 = row3[0] + row3[1] + row3[2]
+    let win4 = row1[0] + row2[0] + row3[0]
+    let win5 = row1[1] + row2[1] + row3[1]
+    let win6 = row1[2] + row2[2] + row3[2]
+    let win7 = row1[0] + row2[1] + row3[2]
+    let win8 = row1[2] + row2[1] + row3[0]
 
     switch (3) {
         case win1:

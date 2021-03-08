@@ -39,7 +39,7 @@ let View = {
             let tile = document.createElement('div');
             tile.setAttribute('class', 'col-4 p-5 border square');
             console.log(this);
-            tile.addEventListener('click', c.tester);
+            tile.addEventListener('click', this.c.tester); // <---- access local members in an object you need to use 'this'
             board.appendChild(tile);
         }
     },

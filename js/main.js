@@ -6,40 +6,46 @@ let Model = {
         this.c = controller;
         
     },
+    board: [0,0,0,0,0,0,0,0,0],
     setState: function (s){
         // update the state variables
         this.onSetState();
     },
     onSetState: function (){
         this.c.updateView();
-    }
+    },
 }
 
 //-------------------View--------------------------
 
 let View = {
     m:null,
-    init: function (model){
+    c:null,
+    //clickBtn:null,
+    init: function (model, controller){
         this.m = model;
+        this.c = controller;
+        //this.clickBtn
     },
     render: function (){
         let mainDiv = document.getElementById('mainDiv')
         let board = document.createElement('div');
         board.setAttribute('class', 'row mx-5 justify-content-center');
         mainDiv.appendChild(board);
+        console.log(board);
+        console.log(this);
 
         for (let i = 0; i < 9; i++) {
             let tile = document.createElement('div');
             tile.setAttribute('class', 'col-4 p-5 border square');
+            console.log(this);
+            tile.addEventListener('click', c.tester);
             board.appendChild(tile);
-
         }
-
-        // update the HTML
     },
     getState: function (){
         var c = this.m.counter;
-        return c;
+        //return c;
     }
 }
 
@@ -52,12 +58,16 @@ let Controller = {
         // setup click handlers
         this.v = view;
         this.m = model;
+        //this.v.clickBtn.addEventListener('click', this.clickTile.bind(this));
         // event listeners
         //this.v.increment_btn.addEventListener('click', this.incrementState.bind(this));
     },
     updateView: function (){
         this.v.render();
-    }
+    },
+    tester: function () {
+        console.log(this);
+    },
     
 }
 
@@ -74,10 +84,11 @@ let App =  {
     init: function (){
         // 3
         this.m.init(this.c);
-
+        console.log(this)
+        
         // 4
-        this.v.init(this.m);
-
+        this.v.init(this.m, this.c);
+        
         // 5
         this.c.init(this.v, this.m);
     },
@@ -94,6 +105,7 @@ function init (){
 
     // 1 - page loads, run init on the app
     App.init();
+    App.v.render();
 
     console.log(App);
 

@@ -1,0 +1,92 @@
+container
+    row
+        header
+    row
+        both players
+            show their wins and losses (stretch goal)
+            show whose turn it is
+            who won / tie (ending win condition first placement)
+            a key to the players like a map that shows whos turn it is (rachels idea)
+    row for the actual grid
+        col (acts as container) - a card as well
+            1 row
+                9 cols - size 4
+            
+    row
+        restart button
+    modal (show the winner or the tie) (ending win condition second placement)
+                    
+2. what goes in the model
+whos turn it is:
+    "x" || "o" as a string (stevens idea)
+    count (0, 1, 2... -> n) (jakes idea)
+        dual purpose: keep track of game moves
+    boolean: true / false x === true, but o is false (Chances idea)
+we need to know who won
+    count (based on the sum of all the rows, cols, diags)
+        // every time you click, you can save the number, or auto increment ++
+        // use a controller method that would set the state of this number
+    store turns in array
+        (0 for no click, 1 for x, -1 for o)
+        (0 for no click, 1 for x, 2 for o)
+        ("" for no click, "X" for x, "O" for o)
+        what the array looks like:
+        [0, 1, 2, 3, 4, 5, 6, 7, 8] - idea 3 ( stores 9)
+        // optional: create a tile class to keep track of all tiles
+        Tile: (class)
+            {
+                "" || "x" || "o"
+                clicked? - can be abstracted
+                "who clicked" - can be abstracted
+                where it is?  - can be abstracted
+                bgColor: "" || "x" || "o" - can be abstracted??? maybe
+            }
+        [
+            Tile, Tile, Tile,
+            Tile, Tile, Tile,
+            Tile, Tile, Tile,
+        ]
+        Board: (class)
+        {
+            is game complete?
+            all tiles: array
+            how many tiles do i have?  - can be abstracted from length of array
+            current state of all my tiles?  - can be abstracted
+        }
+        [{        // too verbose, but it is an option (for chess)
+                tileType:"knight",
+                location: [0,2]
+            },
+            turn2: "0"]
+Parent / Child relationships
+parent can have many children
+children can only have ONE Parent
+children can have many siblingss
+tiles could have states
+    boolean: true / false to dictate the tile clickability
+        tile clickability // controller method
+            on the finish of the game, lock the tiles
+            on any in game click, lock specific tile
+3. what goes in the controller
+- initialize
+    // pseudocode this
+    // about the length of a kata
+- helper function for dynamic rendering
+    // generateElement
+- render method
+- select x or o (stretch goal)
+- tile click event listener
+    // (moves>5) ? condition
+    - win condition
+    // check to see if there is a winner or tie?
+    - set tile clickability for one tile
+    - switch current player
+- win condition
+    did we have a winner or tie?
+    - set tile clickability for all tiles
+    - display the final game state
+    - restart click event listener
+- restart button
+    forfeit / auto win (stretch goal)
+- lose button (stretch goal)
+- game history (stretch goal)

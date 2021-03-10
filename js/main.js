@@ -4,15 +4,19 @@ class Board {
         this.tileClick = this.tileClick.bind(this);
         this.turnCount = 0
         this.xIsNeg = -3
+        this.myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        this.winner = ''
     }
     render() {
         let mainDiv = document.getElementById('mainDiv')
         let title = document.createElement('h1');
         title.setAttribute('class', 'mx-5 justify-content-center text-center');
+        title.setAttribute('id', 'title')
         title.innerText = 'Galactic Tic-Tac-Toe';
         mainDiv.appendChild(title);
         let board = document.createElement('div');
         board.setAttribute('class', 'row mx-5 justify-content-center');
+        board.setAttribute('id', 'board');
         mainDiv.appendChild(board);
 
         for (let i = 0; i < 9; i++) {
@@ -38,72 +42,116 @@ class Board {
             }
         }
     }
+
+    newGame() {
+        console.log('NEW GAME YO!!!!')
+        //this.tileClick = this.tileClick.bind(this);
+        this.turnCount = 0
+        this.xIsNeg = -3
+        //this.myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        this.winner = ''
+
+
+        for (let i = 0; i < 9; i++) {
+            this.boardArray[i].html.innerHTML = ''
+            this.boardArray[i].displayState = ''
+            this.boardArray[i].id = i
+            this.boardArray[i].locked = false
+            this.boardArray[i].html.classList.remove('bg-success')
+        }
+
+    }
+
+    winnerIs(winner) {
+        let lockDiv = document.getElementById('board')
+        lockDiv.classList.add('gameOver');
+        let modalTitle = document.getElementById('modalTitle');
+        if (winner === 3) {
+            modalTitle.innerHTML = ('WINNER</br><i class="fab fa-empire fa-3x text-dark"></i>')
+
+        } else {
+            modalTitle.innerHTML = ('WINNER</br><i class="fab fa-rebel fa-3x text-dark"></i>')
+        }
+        this.myModal.show()
+        let newGameBtn = document.getElementById('newGameBtn');
+        newGameBtn.addEventListener('click', this.newGame)
+
+    }
+
     winCondition() {
         if (this.turnCount % 2 === 0) {
             this.xIsNeg = 3
         } else {
             this.xIsNeg = -3
         }
-        let mainDiv = document.getElementById('mainDiv')
+
+        let lockDiv = document.getElementById('board')
 
         if (this.boardArray[0].displayState + this.boardArray[1].displayState + this.boardArray[2].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!")
+            this.boardArray[0].html.classList.add('bg-success')
+            this.boardArray[1].html.classList.add('bg-success')
+            this.boardArray[2].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
 
-            this.boardArray[0].html.classList.add('bg-danger')
-            this.boardArray[1].html.classList.add('bg-danger')
-            this.boardArray[2].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
-            
         } else if (this.boardArray[3].displayState + this.boardArray[4].displayState + this.boardArray[5].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!")
-            this.boardArray[3].html.classList.add('bg-danger')
-            this.boardArray[4].html.classList.add('bg-danger')
-            this.boardArray[5].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
-            
+            this.boardArray[3].html.classList.add('bg-success')
+            this.boardArray[4].html.classList.add('bg-success')
+            this.boardArray[5].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
+
         } else if (this.boardArray[6].displayState + this.boardArray[7].displayState + this.boardArray[8].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!")
-            this.boardArray[6].html.classList.add('bg-danger')
-            this.boardArray[7].html.classList.add('bg-danger')
-            this.boardArray[8].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
-            
+            this.boardArray[6].html.classList.add('bg-success')
+            this.boardArray[7].html.classList.add('bg-success')
+            this.boardArray[8].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
+
         } else if (this.boardArray[0].displayState + this.boardArray[3].displayState + this.boardArray[6].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!")
-            this.boardArray[0].html.classList.add('bg-danger')
-            this.boardArray[3].html.classList.add('bg-danger')
-            this.boardArray[6].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
-            
+            this.boardArray[0].html.classList.add('bg-success')
+            this.boardArray[3].html.classList.add('bg-success')
+            this.boardArray[6].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
+
         } else if (this.boardArray[1].displayState + this.boardArray[4].displayState + this.boardArray[7].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!")
-            this.boardArray[1].html.classList.add('bg-danger')
-            this.boardArray[4].html.classList.add('bg-danger')
-            this.boardArray[7].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
-            
+            this.boardArray[1].html.classList.add('bg-success')
+            this.boardArray[4].html.classList.add('bg-success')
+            this.boardArray[7].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
+
         } else if (this.boardArray[2].displayState + this.boardArray[5].displayState + this.boardArray[8].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!")
-            this.boardArray[2].html.classList.add('bg-danger')
-            this.boardArray[5].html.classList.add('bg-danger')
-            this.boardArray[8].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
-            
+            this.boardArray[2].html.classList.add('bg-success')
+            this.boardArray[5].html.classList.add('bg-success')
+            this.boardArray[8].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
+
         } else if (this.boardArray[0].displayState + this.boardArray[4].displayState + this.boardArray[8].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!")
-            this.boardArray[0].html.classList.add('bg-danger')
-            this.boardArray[4].html.classList.add('bg-danger')
-            this.boardArray[8].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
-            
+            this.boardArray[0].html.classList.add('bg-success')
+            this.boardArray[4].html.classList.add('bg-success')
+            this.boardArray[8].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
+
         } else if (this.boardArray[6].displayState + this.boardArray[4].displayState + this.boardArray[2].displayState == this.xIsNeg) {
-            console.log(this.xIsNeg === 3 ? "The Empire is the Winner" : "The Rebels have Won!!!");
-            this.boardArray[6].html.classList.add('bg-danger')
-            this.boardArray[4].html.classList.add('bg-danger')
-            this.boardArray[2].html.classList.add('bg-danger')
-            mainDiv.classList.add('gameOver')
+            this.boardArray[6].html.classList.add('bg-success')
+            this.boardArray[4].html.classList.add('bg-success')
+            this.boardArray[2].html.classList.add('bg-success')
+            lockDiv.classList.add('gameOver')
+            this.winnerIs(this.xIsNeg)
         } else {
-            console.log("Other Player's Turn")
+            if (this.turnCount >= 9) {
+                lockDiv.classList.add('gameOver');
+                let modalTitle = document.getElementById('modalTitle');
+                modalTitle.innerHTML = ('There is no Bargain.</br>Tie Game<img src="./img/jappa.png" alt="" class="img-fluid">You Weak Minded Fool!!!')
+                this.myModal.show()
+                let newGameBtn = document.getElementById('newGameBtn');
+                newGameBtn.addEventListener('click', this.newGame())
+
+            }
         }
     }
 }
@@ -123,11 +171,11 @@ class Tile {
         console.log(turnCount)
         if (turnCount % 2 === 0) {
             //this.html.classList.add('bg-success')
-            this.html.innerHTML = '<i class="fab fa-empire fa-3x"></i>';
+            this.html.innerHTML = '<i class="fab fa-empire fa-3x text-white"></i>';
             this.displayState = 1;
         } else {
             //this.html.classList.add('bg-danger')
-            this.html.innerHTML = '<i class="fab fa-rebel fa-3x"></i>';
+            this.html.innerHTML = '<i class="fab fa-rebel fa-3x text-danger"></i>';
             this.displayState = -1;
         }
 
@@ -139,6 +187,4 @@ class Tile {
 function init() {
     const board1 = new Board()
     board1.render()
-
-
 }

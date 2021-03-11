@@ -1,11 +1,96 @@
+html, body {
+    height: 100vh;
+}
+
 #board {
     background-image: url('../img/star-wars.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    min-height: 400px;
 
 }
 
 .gameOver {
     pointer-events: none;
+}
+
+.square {
+    min-width: 30%;
+    max-width: 30%
+}
+
+.square:nth-child(1) {
+    border-bottom: white;
+    border-bottom-style: solid;
+    border-right: white;
+    border-right-style: solid;
+}
+
+.square:nth-child(2) {
+    border-bottom: white;
+    border-bottom-style: solid;
+    border-right: white;
+    border-right-style: solid;
+    border-left: white;
+    border-left-style: solid;
+}
+
+.square:nth-child(3) {
+    border-bottom: white;
+    border-bottom-style: solid;
+    border-left: white;
+    border-left-style: solid;
+}
+
+.square:nth-child(4) {
+    border-bottom: white;
+    border-bottom-style: solid;
+    border-right: white;
+    border-right-style: solid;
+    border-top: white;
+    border-top-style: solid;
+}
+
+.square:nth-child(5) {
+    border-bottom: white;
+    border-bottom-style: solid;
+    border-right: white;
+    border-right-style: solid;
+    border-top: white;
+    border-top-style: solid;
+    border-left: white;
+    border-left-style: solid;
+}
+
+.square:nth-child(6) {
+    border-bottom: white;
+    border-bottom-style: solid;
+    border-top: white;
+    border-top-style: solid;
+    border-left: white;
+    border-left-style: solid;
+}
+
+.square:nth-child(7) {
+    border-top: white;
+    border-top-style: solid;
+    border-right: white;
+    border-right-style: solid;
+}
+
+.square:nth-child(8) {
+    border-top: white;
+    border-top-style: solid;
+    border-right: white;
+    border-right-style: solid;
+    border-left: white;
+    border-left-style: solid;
+}
+
+.square:nth-child(9) {
+    border-top: white;
+    border-top-style: solid;
+    border-left: white;
+    border-left-style: solid;
 }

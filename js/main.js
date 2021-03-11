@@ -6,6 +6,7 @@ class Board {
         this.xIsNeg = -3
         this.myModal = new bootstrap.Modal(document.getElementById('myModal'));
         this.winner = ''
+        this.xyScore = [0,0]
     }
     render() {
         let mainDiv = document.getElementById('mainDiv')
@@ -15,19 +16,26 @@ class Board {
         title.innerText = 'Galactic Tic-Tac-Toe';
         mainDiv.appendChild(title);
         let board = document.createElement('div');
-        board.setAttribute('class', 'row mx-5 justify-content-center');
+        board.setAttribute('class', 'row mx-1 p-3 justify-content-center');
         board.setAttribute('id', 'board');
         mainDiv.appendChild(board);
+        let backUpNewBtn = document.createElement('button');
+        backUpNewBtn.setAttribute('class', 'btn btn-dark mx-5 justify-content-center text-center');
+        backUpNewBtn.setAttribute('id', 'backUpNewBtn')
+        backUpNewBtn.innerText = 'New Game';
+        title.appendChild(backUpNewBtn);
+        backUpNewBtn.addEventListener('click', this.newGame.bind(this))
 
         for (let i = 0; i < 9; i++) {
             const tileObject = new Tile(i);
             let tileHtml = document.createElement('div');
-            tileHtml.setAttribute('class', 'col-4 p-5 border square text-center');
+            tileHtml.setAttribute('class', 'col-4 py-5 square text-center');
             tileHtml.setAttribute('id', i);
             tileHtml.addEventListener('click', e => this.tileClick(i)); // <---- access local members in an object you need to use 'this'
             board.appendChild(tileHtml);
             tileObject.html = tileHtml
             this.boardArray.push(tileObject)
+    
         }
 
     }
@@ -44,37 +52,40 @@ class Board {
     }
 
     newGame() {
-        console.log('NEW GAME YO!!!!')
-        //this.tileClick = this.tileClick.bind(this);
         this.turnCount = 0
-        this.xIsNeg = -3
-        //this.myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        this.xIsNeg = ''
+        this.myModal = new bootstrap.Modal(document.getElementById('myModal'));
         this.winner = ''
+        console.log(this.boardArray)
+        let lockDiv = document.getElementById('board')
+        lockDiv.classList.remove('gameOver')
 
 
         for (let i = 0; i < 9; i++) {
             this.boardArray[i].html.innerHTML = ''
+            this.boardArray[i].html.classList.remove('bg-success')
             this.boardArray[i].displayState = ''
             this.boardArray[i].id = i
             this.boardArray[i].locked = false
-            this.boardArray[i].html.classList.remove('bg-success')
         }
 
     }
+
 
     winnerIs(winner) {
         let lockDiv = document.getElementById('board')
         lockDiv.classList.add('gameOver');
         let modalTitle = document.getElementById('modalTitle');
         if (winner === 3) {
-            modalTitle.innerHTML = ('WINNER</br><i class="fab fa-empire fa-3x text-dark"></i>')
+            modalTitle.innerHTML = ('WINNER</br><i class="position-absolute top-50 start-50 translate-middle fab fa-empire fa-3x text-dark"></i>')
 
         } else {
-            modalTitle.innerHTML = ('WINNER</br><i class="fab fa-rebel fa-3x text-dark"></i>')
+            modalTitle.innerHTML = ('WINNER</br><i class="position-absolute top-50 start-50 translate-middle fab fa-rebel fa-3x text-dark"></i>')
         }
         this.myModal.show()
         let newGameBtn = document.getElementById('newGameBtn');
-        newGameBtn.addEventListener('click', this.newGame)
+        newGameBtn.addEventListener('click', this.newGame.bind(this))
+        
 
     }
 
@@ -149,7 +160,7 @@ class Board {
                 modalTitle.innerHTML = ('There is no Bargain.</br>Tie Game<img src="./img/jappa.png" alt="" class="img-fluid">You Weak Minded Fool!!!')
                 this.myModal.show()
                 let newGameBtn = document.getElementById('newGameBtn');
-                newGameBtn.addEventListener('click', this.newGame())
+                newGameBtn.addEventListener('click', this.newGame);
 
             }
         }
@@ -163,9 +174,9 @@ class Tile {
         this.id = id
         this.locked = false
     }
-    render() {
-        // display blank, X, or O
-    }
+    // render() {
+    //     // display blank, X, or O
+    // }
     usedTile(turnCount) {
         console.log(this.id);
         console.log(turnCount)

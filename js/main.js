@@ -178,14 +178,10 @@ class Tile {
     //     // display blank, X, or O
     // }
     usedTile(turnCount) {
-        console.log(this.id);
-        console.log(turnCount)
         if (turnCount % 2 === 0) {
-            //this.html.classList.add('bg-success')
             this.html.innerHTML = '<i class="fab fa-empire fa-3x text-white"></i>';
             this.displayState = 1;
         } else {
-            //this.html.classList.add('bg-danger')
             this.html.innerHTML = '<i class="fab fa-rebel fa-3x text-danger"></i>';
             this.displayState = -1;
         }

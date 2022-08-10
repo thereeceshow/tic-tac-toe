@@ -16,11 +16,15 @@ class Board {
         title.innerText = 'Galactic Tic-Tac-Toe';
         mainDiv.appendChild(title);
         let board = document.createElement('div');
-        board.setAttribute('class', 'row mx-1 p-3 justify-content-center');
+        board.setAttribute('class', 'row p-3 mx-auto align-items-center justify-content-center');
         board.setAttribute('id', 'board');
         mainDiv.appendChild(board);
+        let content = document.createElement('div');
+        content.setAttribute('class', 'row mx-auto p-3 justify-content-center');
+        content.setAttribute('id', 'content');
+        board.appendChild(content);
         let backUpNewBtn = document.createElement('button');
-        backUpNewBtn.setAttribute('class', 'btn btn-dark mx-5 justify-content-center text-center');
+        backUpNewBtn.setAttribute('class', 'btn btn-dark mx-5 p-3 justify-content-center text-center');
         backUpNewBtn.setAttribute('id', 'backUpNewBtn')
         backUpNewBtn.innerText = 'New Game';
         title.appendChild(backUpNewBtn);
@@ -29,10 +33,10 @@ class Board {
         for (let i = 0; i < 9; i++) {
             const tileObject = new Tile(i);
             let tileHtml = document.createElement('div');
-            tileHtml.setAttribute('class', 'col-4 py-5 square text-center');
+            tileHtml.setAttribute('class', 'col-4 square text-center d-flex align-items-center justify-content-center');
             tileHtml.setAttribute('id', i);
             tileHtml.addEventListener('click', e => this.tileClick(i)); // <---- access local members in an object you need to use 'this'
-            board.appendChild(tileHtml);
+            content.appendChild(tileHtml);
             tileObject.html = tileHtml
             this.boardArray.push(tileObject)
     
@@ -178,15 +182,11 @@ class Tile {
     //     // display blank, X, or O
     // }
     usedTile(turnCount) {
-        console.log(this.id);
-        console.log(turnCount)
         if (turnCount % 2 === 0) {
-            //this.html.classList.add('bg-success')
-            this.html.innerHTML = '<i class="fab fa-empire fa-3x text-white"></i>';
+            this.html.innerHTML = '<i class="fab fa-empire text-white text-center mx-auto"></i>';
             this.displayState = 1;
         } else {
-            //this.html.classList.add('bg-danger')
-            this.html.innerHTML = '<i class="fab fa-rebel fa-3x text-danger"></i>';
+            this.html.innerHTML = '<i class="fab fa-rebel text-danger text-center mx-auto"></i>';
             this.displayState = -1;
         }
 

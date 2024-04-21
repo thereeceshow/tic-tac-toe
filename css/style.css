@@ -97,10 +97,10 @@ body {
   border-left-style: solid;
 }
 
-.fab {
+svg, .fab {
     position: absolute;
+    margin: auto;
     font-size: 10vmin;
-    /* text-align: center; */
 }
 
 @media (orientation: portrait) {
